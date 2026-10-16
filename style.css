@@ -16,3 +16,4 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-si
 .hero img{width:120px;height:120px;border-radius:27px;box-shadow:0 0 60px rgba(120,150,255,.35)}
 .hero h1{letter-spacing:8px;margin-top:28px}
 .tag{letter-spacing:3px;font-size:14px;text-transform:uppercase;color:var(--soft)}
+.btn{display:inline-block;margin-top:8px;padding:16px 28px;border-radius:999px;background:#e8ecff;color:#0d1736;text-decoration:none;font-weight:600}
