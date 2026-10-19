@@ -1,12 +1,203 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Northstar</title><meta name="description" content="Northstar: a calm AI guide that helps you decide what matters and take the next small step.">
-<link rel="icon" href="icon.png"><link rel="stylesheet" href="style.css"></head><body>
-<main class="hero">
-<img src="icon.png" alt="Northstar app icon">
-<h1>Northstar</h1>
-<p class="tag">One clear destination. An intelligent path forward.</p>
-<p>A calm AI guide for iPhone. Talk or type. It helps you decide what matters, then take the next small step.<br>Your direction is always yours.</p>
-<p><a class="btn" href="https://testflight.apple.com/join/TK7BRNar">Try Northstar free on iPhone</a></p>
-<p class="muted">Opens in Apple TestFlight. Free, early version. Your feedback shapes what comes next.</p>
-<footer><a href="privacy.html">Privacy</a> · <a href="mailto:hello@mynorthstarlabs.com">Contact</a> · © 2026 Northstar Labs</footer>
-</main></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Northstar: a calm AI guide for iPhone</title>
+<meta name="description" content="Say what's on your mind. Northstar turns it into a clear next step and finds real help nearby. Free while in beta.">
+<meta property="og:title" content="Northstar: a calm AI guide for iPhone">
+<meta property="og:description" content="Say what's on your mind. Northstar turns it into a clear next step and finds real help nearby. Free while in beta.">
+<meta property="og:image" content="https://mynorthstarlabs.com/media/share.jpg">
+<meta property="og:url" content="https://mynorthstarlabs.com/">
+<meta name="theme-color" content="#070b1f">
+<link rel="icon" href="icon.png"></head><body>
+<style>
+/* Layout: one dark scrolling story. Video hero, then one feature per screen: number + title + plain sentence + the real app screen. */
+:root{
+  --night:#070b1f; --night2:#0e1638; --panel:#121b3f; --line:rgba(255,255,255,.12);
+  --ink:#f2f4ff; --soft:#b9c2e3; --mute:#8790b5; --gold:#e6bb63; --silver:#dfe5f7;
+  --display:-apple-system,"SF Pro Display",system-ui,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--night);color:var(--ink);font-family:var(--display);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.gutter{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1080px;margin:0 auto}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(7,11,31,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:300;letter-spacing:.28em;font-size:19px}
+.mark svg{width:22px;height:22px}
+.pill{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;text-decoration:none;font-weight:600;font-size:16px}
+.pill.light{background:var(--silver);color:#0a1130}
+.pill.ghost{border:1px solid rgba(255,255,255,.35);color:var(--ink)}
+.pill:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* hero */
+.hero{position:relative;min-height:min(88svh,900px);display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,11,31,.15) 0%,rgba(7,11,31,.2) 45%,rgba(7,11,31,.92) 88%,var(--night) 100%)}
+.hero .wrap{width:100%;padding-block:0 64px;text-align:center}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.eyebrow b{color:var(--soft);font-weight:400;margin-left:14px}
+.hero h1{font-weight:200;font-size:clamp(46px,11vw,96px);line-height:1.02;letter-spacing:-.02em;margin:14px 0 14px;text-wrap:balance}
+.hero p{margin:0 auto;max-width:34ch;color:var(--soft);font-size:clamp(18px,4.4vw,22px)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.small{font-size:14px;color:var(--mute);margin-top:14px}
+
+/* features */
+.feature{padding-block:88px;border-top:1px solid var(--line)}
+.feature .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.feature:nth-of-type(odd) .text{order:2}
+.text{min-width:0}
+.feature h2{font-weight:300;font-size:clamp(36px,7vw,58px);line-height:1.06;letter-spacing:-.015em;margin:14px 0 18px;text-wrap:balance}
+.feature p{color:var(--soft);margin:0 0 14px;max-width:44ch}
+.points{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px}
+.points li{display:flex;gap:12px;color:var(--soft)}
+.points li::before{content:"";flex:none;width:8px;height:8px;margin-top:10px;background:var(--gold);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%)}
+.shots{display:flex;gap:18px;justify-content:center;min-width:0}
+.phone{margin:0;width:min(330px,100%);border-radius:34px;overflow:hidden;border:1px solid rgba(255,255,255,.22);background:var(--panel);box-shadow:0 30px 80px -20px rgba(80,110,220,.45),0 0 0 6px rgba(255,255,255,.03)}
+.phone img{display:block;width:100%;height:auto}
+.shots.two .phone{width:min(250px,48%)}
+.shots.two .phone:last-child{margin-top:60px}
+.note{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:10px;text-align:center}
+.shotcol{display:flex;flex-direction:column;align-items:center;min-width:0}
+
+/* facts */
+.facts{padding-block:72px;border-top:1px solid var(--line);background:linear-gradient(180deg,var(--night),var(--night2))}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.fact b{display:block;font-weight:200;font-size:clamp(44px,9vw,68px);line-height:1;font-variant-numeric:tabular-nums}
+.fact span{display:block;margin-top:10px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+
+/* closing */
+.cta{padding-block:110px 90px;text-align:center;border-top:1px solid var(--line);background:radial-gradient(60% 50% at 50% 30%,rgba(230,187,99,.14),transparent 70%),var(--night2)}
+.cta .star{width:64px;height:64px;filter:drop-shadow(0 0 18px rgba(255,226,160,.8))}
+.cta h2{font-weight:200;font-size:clamp(40px,9vw,76px);line-height:1.05;margin:22px 0 14px;text-wrap:balance}
+.cta p{color:var(--soft);margin:0 auto;max-width:40ch}
+footer{padding-block:28px 40px;border-top:1px solid var(--line);color:var(--mute);font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:space-between}
+footer a{color:var(--soft);text-decoration:none}
+
+@media (max-width:760px){
+  .feature{padding-block:64px}
+  .feature .wrap{grid-template-columns:1fr;gap:36px}
+  .feature:nth-of-type(odd) .text{order:0}
+  .text{text-align:left}
+  .grid{grid-template-columns:repeat(2,1fr);row-gap:36px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<header class="bar gutter"><div class="wrap">
+  <a class="mark" href="#top" aria-label="Northstar home">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#f4e3b8" d="M12 0l2.2 9.8L24 12l-9.8 2.2L12 24l-2.2-9.8L0 12l9.8-2.2z"/></svg>Northstar</a>
+  <a class="pill light" href="https://testflight.apple.com/join/TK7BRNar">Try it free</a>
+</div></header>
+
+<section class="hero gutter" id="top">
+  <img class="poster" src="media/hero-poster.jpg" alt="">
+  <video autoplay muted loop playsinline poster="media/hero-poster.jpg" aria-hidden="true">
+    <source src="media/hero.mp4" type="video/mp4">
+  </video>
+  <div class="wrap">
+    <div class="eyebrow">A calm AI guide for iPhone</div>
+    <h1>What's on your mind?</h1>
+    <p>Northstar turns it into a clear next step, and finds real help nearby.</p>
+    <div class="actions">
+      <a class="pill light" href="https://testflight.apple.com/join/TK7BRNar">Try Northstar free</a>
+      <a class="pill ghost" href="#discovery">See what it does ↓</a>
+    </div>
+    <div class="small">Free while in beta · iPhone · via Apple TestFlight</div>
+  </div>
+</section>
+
+<section class="feature gutter" id="discovery"><div class="wrap">
+  <div class="text">
+    <div class="eyebrow">01<b>Discovery</b></div>
+    <h2>Say it. See your ways forward.</h2>
+    <p>Type or speak what's on your mind. A few clear paths appear around the star, and the answer opens right there, with no long chat to scroll through.</p>
+    <ul class="points"><li>"I have a toothache" → find a dentist, ease the pain, plan what to say</li><li>Talk it through in Chat only when you want to</li></ul>
+  </div>
+  <div class="shots"><figure class="phone"><img src="media/discovery.jpg" alt="Discovery screen: a glowing star with four suggestion bubbles for a toothache" width="720" height="1172"></figure></div>
+</div></section>
+
+<section class="feature gutter"><div class="wrap">
+  <div class="text">
+    <div class="eyebrow">02<b>Chat</b></div>
+    <h2>Talk it through, when you want to.</h2>
+    <p>Some things need more than a quick answer. Open Chat for real back-and-forth: think through a decision, plan something big, or just be heard.</p>
+    <ul class="points"><li>Listen, Copy and Share under every reply</li><li>Day or Night look, your choice</li></ul>
+  </div>
+  <div class="shots"><figure class="phone"><img src="media/chat.jpg" alt="Chat screen in the Day look: Northstar asks What's on your mind?" width="720" height="1390"></figure></div>
+</div></section>
+
+<section class="feature gutter"><div class="wrap">
+  <div class="text">
+    <div class="eyebrow">03<b>Real help nearby</b></div>
+    <h2>Real help, compared for you.</h2>
+    <p>Need a plumber, a cleaner or an electrician? Northstar compares local businesses by their Google rating and how many people reviewed them, recommends one and tells you why.</p>
+    <ul class="points"><li>Top pick plus three more, with distance and hours</li><li>You make the final call</li></ul>
+  </div>
+  <div class="shotcol"><div class="shots"><figure class="phone"><img src="media/provider.jpg" alt="Northstar Recommends card: an example cleaning service, 4.8 out of 5" width="720" height="1292"></figure></div><div class="note">Example businesses and events</div></div>
+</div></section>
+
+<section class="feature gutter"><div class="wrap">
+  <div class="text">
+    <div class="eyebrow">04<b>Concierge</b></div>
+    <h2>A concierge in your pocket.</h2>
+    <p>Dinner, events, travel, fitness, errands, apartments and EV charging. Real places on a map, with Reserve, Call and Ride buttons.</p>
+    <ul class="points"><li>Pick a tile, get a few good options, you choose</li><li>Northstar never books or pays without you</li></ul>
+  </div>
+  <div class="shotcol"><div class="shots two"><figure class="phone"><img src="media/concierge.jpg" alt="Concierge screen with service tiles: Dinner, Shopping, Fun, Events, Fitness, Travel" width="720" height="1390"></figure><figure class="phone"><img src="media/dinner.jpg" alt="Dinner results with a map and Reserve, Call and Ride buttons" width="720" height="1292"></figure></div><div class="note">Example businesses and events</div></div>
+</div></section>
+
+<section class="feature gutter"><div class="wrap">
+  <div class="text">
+    <div class="eyebrow">05<b>Events</b></div>
+    <h2>What's on tonight, in any city.</h2>
+    <p>Concerts, games and shows near you, with real dates and distances. Planning a trip? Change the city in one tap.</p>
+    <ul class="points"><li>Events from Ticketmaster and SeatGeek</li><li>Add one to your calendar</li></ul>
+  </div>
+  <div class="shotcol"><div class="shots"><figure class="phone"><img src="media/events.jpg" alt="Events screen: Happening in San Francisco, with a Change city button" width="720" height="1478"></figure></div><div class="note">Example businesses and events</div></div>
+</div></section>
+
+<section class="feature gutter"><div class="wrap">
+  <div class="text">
+    <div class="eyebrow">06<b>Brain level</b></div>
+    <h2>Choose how hard it thinks.</h2>
+    <p>Fast for quick answers. Smart thinks it through on hard questions. Deep takes its time on almost everything.</p>
+    <ul class="points"><li>Up to 15 thought-through answers a day</li><li>Help in a crisis always gets the best answer</li></ul>
+  </div>
+  <div class="shots"><figure class="phone"><img src="media/brain.jpg" alt="Brain level choices: Fast, Smart (selected) and Deep" width="720" height="1009"></figure></div>
+</div></section>
+
+<section class="feature gutter"><div class="wrap">
+  <div class="text">
+    <div class="eyebrow">07<b>Your day, your memory</b></div>
+    <h2>Plan around your real day.</h2>
+    <p>Connect Calendar and Reminders when you want to. Northstar only reads what you allow, only when you ask. Your memory is yours to see, change or delete.</p>
+    <ul class="points"><li>No ads, no selling your information</li><li>Sign in with Apple is optional</li></ul>
+  </div>
+  <div class="shots"><figure class="phone"><img src="media/connections.jpg" alt="Connections: Calendar and Reminders connected, Contacts coming soon" width="720" height="856"></figure></div>
+</div></section>
+
+<section class="facts gutter"><div class="wrap grid">
+  <div class="fact"><b>11</b><span>Concierge services</span></div>
+  <div class="fact"><b>3</b><span>Brain levels</span></div>
+  <div class="fact"><b>15</b><span>Deep Think answers a day</span></div>
+  <div class="fact"><b>$0</b><span>While in beta</span></div>
+</div></section>
+
+<section class="cta gutter"><div class="wrap">
+  <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#f4e3b8" d="M12 0l2.2 9.8L24 12l-9.8 2.2L12 24l-2.2-9.8L0 12l9.8-2.2z"/></svg>
+  <h2>One clear destination.<br>An intelligent path forward.</h2>
+  <p>Northstar is free while it's in beta. Your feedback shapes what comes next.</p>
+  <div class="actions"><a class="pill light" href="https://testflight.apple.com/join/TK7BRNar">Try Northstar free on iPhone</a></div>
+  <div class="small">Opens in Apple TestFlight.</div>
+</div></section>
+
+<footer class="gutter"><div class="wrap">
+  <span>© 2026 Northstar Labs</span>
+  <span><a href="privacy.html">Privacy</a> · hello@mynorthstarlabs.com</span>
+</div></footer>
+</body></html>
