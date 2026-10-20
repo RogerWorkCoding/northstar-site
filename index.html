@@ -88,6 +88,11 @@ a{color:inherit}
 .cta .star{width:64px;height:64px;filter:drop-shadow(0 0 18px rgba(255,226,160,.8))}
 .cta h2{font-weight:200;font-size:clamp(40px,9vw,76px);line-height:1.05;margin:22px 0 14px;text-wrap:balance}
 .cta p{color:var(--soft);margin:0 auto;max-width:40ch}
+.cta .scan{display:none;align-items:center;justify-content:center;gap:22px;margin:30px auto 6px;text-align:left}
+.cta .scan img{width:180px;height:180px;border-radius:22px;background:#fff;padding:8px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.cta .scan p{margin:0;max-width:22ch;color:var(--soft)}
+.cta .scan strong{color:var(--ink,#f2f4fa)}
+@media (min-width:820px){.cta .scan{display:flex}}
 footer{padding-block:28px 40px;border-top:1px solid var(--line);color:var(--mute);font-size:15px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:space-between}
 footer a{color:var(--soft);text-decoration:none}
@@ -345,6 +350,10 @@ footer a{color:var(--soft);text-decoration:none}
   <p>Northstar is free while it's in beta. Your feedback shapes what comes next.</p>
   <div class="actions"><a class="pill light" href="https://testflight.apple.com/join/TK7BRNar">Try Northstar free on iPhone</a></div>
   <div class="small">Opens in Apple TestFlight.</div>
+  <div class="scan">
+    <img src="media/qr-testflight.png" width="180" height="180" alt="QR code that opens Northstar in Apple TestFlight">
+    <p><strong>On a computer?</strong><br>Point your iPhone camera here to get Northstar.</p>
+  </div>
   <div class="install" id="install">
     <h3>How to install (2 steps)</h3>
     <div class="step"><b>1</b><p>Tap <strong>Try Northstar free</strong>. Apple asks you to get <strong>TestFlight</strong>, Apple's free app for trying new apps. Install it from the App Store.</p></div>
